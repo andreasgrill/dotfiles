@@ -12,11 +12,12 @@ compinit
 # End of lines added by compinstall
 
 if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+  export POWERLINE_HOME=~/.local/lib/python2.7/site-packages/powerline
 elif [[ -r /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-  source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+  export POWERLINE_HOME=/usr/local/lib/python2.7/site-packages/powerline
 fi
 
+source "${POWERLINE_HOME}/bindings/zsh/powerline.zsh"
 source "${HOME}/.zgen/zgen.zsh"
 
 # if the init scipt doesn't exist
