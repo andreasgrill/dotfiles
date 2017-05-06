@@ -11,13 +11,19 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+#PATH="$HOME/Library/Python/2.7/bin:PATH"
+
 if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
   export POWERLINE_HOME=~/.local/lib/python2.7/site-packages/powerline
 elif [[ -r /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
   export POWERLINE_HOME=/usr/local/lib/python2.7/site-packages/powerline
+elif [[ -r /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+  export POWERLINE_HOME=/usr/share/powerline
+elif [[ -r ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+  export POWERLINE_HOME=~/Library/Python/2.7/lib/python/site-packages/powerline
 fi
 
-source "${POWERLINE_HOME}/bindings/zsh/powerline.zsh"
+#source "${POWERLINE_HOME}/bindings/zsh/powerline.zsh"
 source "${HOME}/.zgen/zgen.zsh"
 
 # if the init scipt doesn't exist
@@ -63,6 +69,9 @@ if ! zgen saved; then
   POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   zgen load bhilburn/powerlevel9k powerlevel9k
 
+  #zgen load tylerreckart/hyperzsh
+  #zgen load olivierverdier/zsh-git-prompt
+
   # generate the init script from plugins above
   zgen save
 fi
@@ -104,5 +113,8 @@ export DEFAULT_USER="$(whoami)"
 #PROMPT='%~%b$(git_super_status) %# '
 
 # Tyler Reckart Prompt
-# PROMPT='$(_user_host)$(_python_venv)%{$fg[cyan]%}%c $(git_prompt_info)%{$reset_color%}$(git_prompt_short_sha)%{$fg[magenta]%}$(_git_time_since_commit)$(git_prompt_status)${_return_status}➜ '
+#PROMPT='$(_user_host)$(_python_venv)%{$fg[cyan]%}%c $(git_prompt_info)%{$reset_color%}$(git_prompt_short_sha)%{$fg[magenta]%}$(_git_time_since_commit)$(git_prompt_status)${_return_status}➜ '
+
+#eval $(thefuck --alias) 
+alias xs-build="gradle build -x test -x webpack"
 
