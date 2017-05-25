@@ -8,7 +8,7 @@ bindkey -v
 zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
-compinit
+compinit -i
 # End of lines added by compinstall
 
 #PATH="$HOME/Library/Python/2.7/bin:PATH"
@@ -25,6 +25,16 @@ fi
 
 #source "${POWERLINE_HOME}/bindings/zsh/powerline.zsh"
 source "${HOME}/.zgen/zgen.zsh"
+
+
+#POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_with_folder_marker"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=0
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+POWERLEVEL9K_SHORTEN_FOLDER_MARKER=(.git package.json build.gradle)
 
 # if the init scipt doesn't exist
 if ! zgen saved; then
@@ -61,12 +71,6 @@ if ! zgen saved; then
   # theme
   #zgen oh-my-zsh themes/agnoster
   
-  POWERLEVEL9K_MODE='awesome-patched'
-  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-  POWERLEVEL9K_STATUS_VERBOSE=false
-  POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-  POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   zgen load bhilburn/powerlevel9k powerlevel9k
 
   #zgen load tylerreckart/hyperzsh
@@ -78,14 +82,6 @@ fi
 
 
 # Git Prompts
-#antigen bundle olivierverdier/zsh-git-prompt
-#antigen bundle tylerreckart/hyperzsh
-
-#antigen bundle rupa/z
-#add-zsh-hook precmd _z_precmd
-#function _z_precmd {
-#    _z --add "$PWD"
-#}
 
 # Setup suggestions
 # zle-line-init() {
@@ -109,12 +105,13 @@ fi
 export EDITOR=vi
 export DEFAULT_USER="$(whoami)"
 
+# Prefer brew binaries over system binaries
+export PATH="/usr/local/bin:$PATH"
+
 # Oliver Verdier Prompt
 #PROMPT='%~%b$(git_super_status) %# '
 
 # Tyler Reckart Prompt
 #PROMPT='$(_user_host)$(_python_venv)%{$fg[cyan]%}%c $(git_prompt_info)%{$reset_color%}$(git_prompt_short_sha)%{$fg[magenta]%}$(_git_time_since_commit)$(git_prompt_status)${_return_status}➜ '
 
-#eval $(thefuck --alias) 
-alias xs-build="gradle build -x test -x webpack"
-
+alias preview="qlmanage -p" 
