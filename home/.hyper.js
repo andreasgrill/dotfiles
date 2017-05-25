@@ -98,20 +98,9 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-	//'hyperline',
-	'hyper-blink',
-	'hyperlinks',
-	//'hyper-tab-icons',
-	//'hyperterm-paste',
-	'hyperterm-dibdabs',
-	'hyperblue',
-	'hyperblue-vibrancy',
-	'hyperterm-alternatescroll',
-	'hyperterm-tabs',
-	'hyper-statusline',
-	//'hyper-history',
-	//'hyper-sync-settings',
-	'hypercwd'
+  'hyper-blink', 'hyperlinks',
+  'hyperterm-dibdabs', 'hyperblue', 'hyperblue-vibrancy', 'hyperterm-alternatescroll',
+  'hypercwd', 'hyper-alt-click'
   ],
 
   // in development, you can create a directory under
