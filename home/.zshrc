@@ -1,93 +1,89 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '~/.zshrc'
+# Install with the following commands
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-autoload -Uz compinit
-compinit -i
-# End of lines added by compinstall
 
-#PATH="$HOME/Library/Python/2.7/bin:PATH"
-
-if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-  export POWERLINE_HOME=~/.local/lib/python2.7/site-packages/powerline
-elif [[ -r /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-  export POWERLINE_HOME=/usr/local/lib/python2.7/site-packages/powerline
-elif [[ -r /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
-  export POWERLINE_HOME=/usr/share/powerline
-elif [[ -r ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-  export POWERLINE_HOME=~/Library/Python/2.7/lib/python/site-packages/powerline
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#source "${POWERLINE_HOME}/bindings/zsh/powerline.zsh"
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_DISABLE_COMPFIX="true" # needed because of multi-user env
 
-POWERLEVEL9K_MODE="nerdfont-complete"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_with_folder_marker"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=0
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_FOLDER_MARKER=(.git package.json build.gradle)
-POWERLEVEL9K_VCS_GIT_ICON="" # remove general git icon
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-source "${HOME}/.zgen/zgen.zsh"
+POWERLEVEL9K_MODE="awesome-patched"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=60"
 
-# if the init scipt doesn't exist
-if ! zgen saved; then
+plugins=(
+  git 
+  npm 
+  mvn 
+  history 
+  docker 
+  python 
+  command-not-found 
+  common-aliases 
+  z 
+  osx 
+  bundler 
+  dotenv
+  zsh-syntax-highlighting
+  zsh-history-substring-search
+  zsh-autosuggestions
+)
 
-  # specify plugins here
-  zgen oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 
-  # load from omz
-  zgen oh-my-zsh plugins/git
-  zgen oh-my-zsh plugins/npm
-  zgen oh-my-zsh plugins/ng
-  zgen oh-my-zsh plugins/mvn
-  zgen oh-my-zsh plugins/jira
-  zgen oh-my-zsh plugins/history
-  zgen oh-my-zsh plugins/gradle
-  zgen oh-my-zsh plugins/git-flow
-  zgen oh-my-zsh plugins/git-extras
-  zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/python
-  zgen oh-my-zsh plugins/heroku
-  zgen oh-my-zsh plugins/pip
-  zgen oh-my-zsh plugins/lein
-  zgen oh-my-zsh plugins/command-not-found
-  zgen oh-my-zsh plugins/common-aliases
-  zgen oh-my-zsh plugins/svn
-  zgen oh-my-zsh plugins/z
+# User configuration
 
-  # load from other repos
-  zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zsh-users/zsh-history-substring-search
-  zgen load tarruda/zsh-autosuggestions
-  zgen load zsh-users/zsh-completions src
+# export MANPATH="/usr/local/man:$MANPATH"
 
-  # theme
-  zgen load bhilburn/powerlevel9k powerlevel9k
-
-  # generate the init script from plugins above
-  zgen save
-fi
-
-
-# Automatically list directory contents on `cd`.
-#auto-ls () { ls; }
-#chpwd_functions=( auto-ls $chpwd_functions )
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
 export EDITOR=vi
 export DEFAULT_USER="$(whoami)"
 
-# Prefer brew binaries over system binaries
-export PATH="/usr/local/bin:$PATH"
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-alias preview="qlmanage -p" 
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-source "/Users/$USER/.customrc"
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+
+source ~/.customrc
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
