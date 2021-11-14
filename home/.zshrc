@@ -35,13 +35,12 @@ plugins=(
   git 
   npm 
   mvn 
-  history 
+  macos 
   docker 
   python 
   command-not-found 
   common-aliases 
   z 
-  osx 
   bundler 
   dotenv
   zsh-syntax-highlighting
